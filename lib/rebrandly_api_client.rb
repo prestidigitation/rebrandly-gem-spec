@@ -4,14 +4,18 @@ Rebrandly.configure do |config|
   config.api_key = ENV["REBRANDLY_KEY"]
 end
 
-def create_short_link(url, domain, title, description, favourite)
+def get_domain_info(id)
+  api = Rebrandly::Api.new
+  api.domain(id)
+end
+
+def create_short_link(destination_url, domain_info, title, description)
   api = Rebrandly::Api.new
   link = api.shorten(
-    url,
-    domain: domain,
+    destination_url,
+    domain_info: domain_info.to_h,
     title: title,
     description: description,
-    favourite: favourite
   )
 end
 
