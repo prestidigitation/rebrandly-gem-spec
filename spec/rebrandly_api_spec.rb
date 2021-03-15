@@ -14,13 +14,13 @@ describe "Rebrandly service" do
     @api = Rebrandly::Api.new
   end
 
-  it "fetches domain info object from Rebrandly live API" do
+  it "fetches domain info object from Rebrandly live API", :vcr do
     domain_info = @api.domain(v4v_domain_id)
     expect(domain_info.id).to eq(v4v_domain_id)
     expect(domain_info.full_name).to eq(v4v_domain_name)
   end
 
-  it "creates a shortUrl on Rebrandly live API" do
+  it "creates a shortUrl on Rebrandly live API", :vcr do
     domain_info = @api.domain(v4v_domain_id)
     response = @api.shorten(
       destination_url,
